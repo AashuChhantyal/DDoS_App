@@ -37,6 +37,21 @@ class Post {
     );
   }
 
+  // Needed for Task 9: Converts Post instance into JSON for local Hive caching
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'content': content,
+      'category': category,
+      'readTimeMinutes': readTimeMinutes,
+      'isCompleted': isCompleted,
+      'isSaved': isSaved,
+      'seriesId': seriesId,
+      'createdAt': createdAt.toIso8601String(),
+    };
+  }
+
   Post copyWith({bool? isCompleted, bool? isSaved}) {
     return Post(
       id: id,

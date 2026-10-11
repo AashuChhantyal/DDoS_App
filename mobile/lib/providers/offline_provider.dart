@@ -17,7 +17,7 @@ class OfflineProvider extends ChangeNotifier {
 
   Future<void> loadSavedData() async {
     _savedPosts = await _storageService.getSavedPosts();
-    _cachedFeed = await _offlineService.getCachedDailyFeed();
+    _cachedFeed = _offlineService.getCachedDailyFeed();
     notifyListeners();
   }
 

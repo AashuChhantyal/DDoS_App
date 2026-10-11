@@ -6,6 +6,9 @@ class User {
   final int streakDays;
   final int conceptsMastered;
   final double accuracy;
+  final DateTime? lastCompletedAt;
+  final int dailyGoal;
+  final int dailyProgress;
 
   User({
     required this.id,
@@ -15,7 +18,36 @@ class User {
     required this.streakDays,
     required this.conceptsMastered,
     required this.accuracy,
+    this.lastCompletedAt,
+    this.dailyGoal = 1,
+    this.dailyProgress = 0,
   });
+
+  User copyWith({
+    String? id,
+    String? name,
+    String? email,
+    String? role,
+    int? streakDays,
+    int? conceptsMastered,
+    double? accuracy,
+    DateTime? lastCompletedAt,
+    int? dailyGoal,
+    int? dailyProgress,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      role: role ?? this.role,
+      streakDays: streakDays ?? this.streakDays,
+      conceptsMastered: conceptsMastered ?? this.conceptsMastered,
+      accuracy: accuracy ?? this.accuracy,
+      lastCompletedAt: lastCompletedAt ?? this.lastCompletedAt,
+      dailyGoal: dailyGoal ?? this.dailyGoal,
+      dailyProgress: dailyProgress ?? this.dailyProgress,
+    );
+  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -28,6 +60,11 @@ class User {
         json['conceptsMastered'] ?? json['concepts_mastered'],
       ),
       accuracy: _parseDouble(json['accuracy']),
+      lastCompletedAt: json['lastCompletedAt'] != null
+          ? DateTime.tryParse(json['lastCompletedAt'].toString())
+          : null,
+      dailyGoal: _parseInt(json['dailyGoal'] ?? 1),
+      dailyProgress: _parseInt(json['dailyProgress'] ?? 0),
     );
   }
 
@@ -40,6 +77,9 @@ class User {
       'streakDays': streakDays,
       'conceptsMastered': conceptsMastered,
       'accuracy': accuracy,
+      'lastCompletedAt': lastCompletedAt?.toIso8601String(),
+      'dailyGoal': dailyGoal,
+      'dailyProgress': dailyProgress,
     };
   }
 

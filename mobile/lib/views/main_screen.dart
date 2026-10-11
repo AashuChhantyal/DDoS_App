@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'explore/explore_screen.dart'; // Adjust path if needed
 import '../utils/constants.dart';
-import 'profile/profile_screen.dart';
+import 'daily_dose/daily_dose_screen.dart';
+import 'profile/profile_screen.dart'; // Adjust path if profile_screen is inside views or screens
+import 'home/home_screen.dart';
+import 'progress/progress_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -10,13 +14,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 0; // Starts at Home Feed (0)
 
   final List<Widget> _pages = [
-    const Center(child: Text('Home Feed Placeholder')),
-    const Center(child: Text('Explore Placeholder')),
-    const Center(child: Text('Daily Dose Placeholder')),
-    const Center(child: Text('Progress Placeholder')),
+    const HomeScreen(),
+    const ExploreScreen(),
+    const DailyDoseScreen(), // Placed actual Daily Dose widget here
+    const ProgressScreen(),
     const ProfileScreen(),
   ];
 
